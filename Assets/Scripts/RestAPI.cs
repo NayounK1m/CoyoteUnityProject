@@ -67,19 +67,19 @@ public class RestAPI : MonoBehaviour
         {
             failed = true;
             Debug.Log(e.Message);
-            //if(FailedLoadPanel.gameObject.activeSelf == false)
-            //{
-            //    FailedLoadPanel.gameObject.SetActive(true);
-            //    FailedText.text = "Failed to load. \n" + e.Message;
-            //}
+            if (FailedLoadPanel.gameObject.activeSelf == false)
+            {
+                FailedLoadPanel.gameObject.SetActive(true);
+                FailedText.text = "Failed to load. \n" + e.Message;
+            }
 
         }
         catch (Exception e)
         {
             failed = true;
             Debug.Log("Failed to load: " + e.Message);
-            //if (FailedLoadPanel.gameObject.activeSelf == false)
-            //    FailedLoadPanel.gameObject.SetActive(true);
+            if (FailedLoadPanel.gameObject.activeSelf == false)
+                FailedLoadPanel.gameObject.SetActive(true);
         }
     }
 }
