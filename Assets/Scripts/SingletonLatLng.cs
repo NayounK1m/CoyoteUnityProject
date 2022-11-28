@@ -9,8 +9,8 @@ public class SingletonLatLng : MonoBehaviour
     public static SingletonLatLng instance = null;
     public double Lat { get; set; }
     public double Lng { get; set; }
-    public double[] LatSensor = { };
-    public double[] LngSensor = { };
+    public double[] LatSensor = new double[3];
+    public double[] LngSensor = new double[3];
 
     //public double LatSensor1 {get; set;}
     //public double LngSensor1 {get; set;}

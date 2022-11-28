@@ -56,6 +56,7 @@ public class RestAPI : MonoBehaviour
             double logitude = System.Convert.ToDouble(lng, provider);
 
             Debug.Log("double: "+latitude + ", " + logitude);
+
             SingletonLatLng.instance.LatSensor[0] = latitude;
             SingletonLatLng.instance.LngSensor[0] = logitude;
 
@@ -66,19 +67,19 @@ public class RestAPI : MonoBehaviour
         {
             failed = true;
             Debug.Log(e.Message);
-            if(FailedLoadPanel.gameObject.activeSelf == false)
-            {
-                FailedLoadPanel.gameObject.SetActive(true);
-                FailedText.text = "Failed to load. \n" + e.Message;
-            }
+            //if(FailedLoadPanel.gameObject.activeSelf == false)
+            //{
+            //    FailedLoadPanel.gameObject.SetActive(true);
+            //    FailedText.text = "Failed to load. \n" + e.Message;
+            //}
 
         }
         catch
         {
             failed = true;
             Debug.Log("Failed to load");
-            if (FailedLoadPanel.gameObject.activeSelf == false)
-                FailedLoadPanel.gameObject.SetActive(true);
+            //if (FailedLoadPanel.gameObject.activeSelf == false)
+            //    FailedLoadPanel.gameObject.SetActive(true);
         }
     }
 }
