@@ -57,10 +57,10 @@ public class RestAPI : MonoBehaviour
 
             Debug.Log("double: "+latitude + ", " + logitude);
 
-            SingletonLatLng.instance.LatSensor[0] = latitude;
-            SingletonLatLng.instance.LngSensor[0] = logitude;
+            SingletonLatLng.instance.LatSensor[1] = latitude;
+            SingletonLatLng.instance.LngSensor[1] = logitude;
 
-            Debug.Log(SingletonLatLng.instance.LatSensor[0] + ", " + SingletonLatLng.instance.LngSensor[0]);
+            Debug.Log(SingletonLatLng.instance.LatSensor[1] + ", " + SingletonLatLng.instance.LngSensor[0]);
 
         }
         catch (WebException e)
@@ -74,10 +74,10 @@ public class RestAPI : MonoBehaviour
             //}
 
         }
-        catch
+        catch (Exception e)
         {
             failed = true;
-            Debug.Log("Failed to load");
+            Debug.Log("Failed to load: " + e.Message);
             //if (FailedLoadPanel.gameObject.activeSelf == false)
             //    FailedLoadPanel.gameObject.SetActive(true);
         }
