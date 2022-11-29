@@ -12,7 +12,6 @@
 		[SerializeField]
 		AbstractMap _map;
 
-		[SerializeField]
 		[Geocode]
 		string[] _locationStrings;
 		Vector2d[] _locations;
