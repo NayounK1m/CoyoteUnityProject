@@ -53,20 +53,18 @@ public class Node : MonoBehaviour
         Debug.Log(e.Data);//받은 메세지를 디버그 콘솔에 출력
 
         //파싱
-        string data = JsonUtility.ToJson(e.Data);
+        string data = e.Data;
+        string[] codes  = data.Split(',');
 
-        Debug.Log(data);
-        //string[] codes  = data.Split(',');
+        //string to double convert
+        NumberFormatInfo provider = new NumberFormatInfo();
+        provider.NumberDecimalSeparator = ".";
+        double latitude = System.Convert.ToDouble(codes[0], provider);
+        double longitude = System.Convert.ToDouble(codes[1], provider);
 
-        ////string to double convert
-        //NumberFormatInfo provider = new NumberFormatInfo();
-        //provider.NumberDecimalSeparator = ".";
-        //double latitude = System.Convert.ToDouble(codes[0], provider);
-        //double longitude = System.Convert.ToDouble(codes[1], provider);
-
-        ////save at singleton
-        //SingletonLatLng.instance.Lat = latitude;
-        //SingletonLatLng.instance.Lng = longitude;
+        //save at singleton
+        SingletonLatLng.instance.Lat = latitude;
+        SingletonLatLng.instance.Lng = longitude;
 
         notifyManager();
 

@@ -40,8 +40,10 @@ public class SingletonLatLng : MonoBehaviour
         {
             if (LatSensor[i] == 0)
                 LatSensor[i] = lat;
-            else
-                Debug.Log(LatSensor[i]);
+            if (LngSensor[i] == 0)
+                LngSensor[i] = lng;
+
+            Debug.Log("sensor" + i+ ": " +LatSensor[i] + ", " + LngSensor[i]);
         }
 
     }

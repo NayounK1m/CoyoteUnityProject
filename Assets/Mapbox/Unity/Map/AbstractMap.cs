@@ -8,12 +8,14 @@ namespace Mapbox.Unity.Map
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Mapbox.Unity.Utilities;
 	using Utils;
 	using UnityEngine;
 	using Mapbox.Map;
 	using Mapbox.Unity.MeshGeneration.Factories;
 	using Mapbox.Unity.MeshGeneration.Data;
+	using System.Globalization;
 
 	/// <summary>
 	/// Abstract map.
@@ -48,7 +50,6 @@ namespace Mapbox.Unity.Map
 		protected Vector3 _cachedPosition;
 		protected Quaternion _cachedRotation;
 		protected Vector3 _cachedScale = Vector3.one;
-
 		#endregion
 
 		#region Properties
@@ -315,7 +316,7 @@ namespace Mapbox.Unity.Map
 			{
 				_options = new MapOptions();
 			}
-			//_options.locationOptions.latitudeLongitude = String.Format(CultureInfo.InvariantCulture, "{0},{1}", latLon.x, latLon.y);
+			_options.locationOptions.latitudeLongitude = String.Format(CultureInfo.InvariantCulture, "{0},{1}", latLon.x, latLon.y);
 			_options.locationOptions.zoom = zoom;
 
 			SetUpMap();
@@ -335,7 +336,7 @@ namespace Mapbox.Unity.Map
 
 		public virtual void UpdateMap()
 		{
-			UpdateMap(new Vector2d(SingletonLatLng.instance.LatSensor[0], SingletonLatLng.instance.LngSensor[0]), Zoom);
+			UpdateMap(Conversions.StringToLatLon(_options.locationOptions.latitudeLongitude), Zoom);
 		}
 
 		public virtual void UpdateMap(Vector2d latLon)
@@ -345,7 +346,7 @@ namespace Mapbox.Unity.Map
 
 		public virtual void UpdateMap(float zoom)
 		{
-			UpdateMap(new Vector2d(SingletonLatLng.instance.LatSensor[0], SingletonLatLng.instance.LngSensor[0]), zoom);
+			UpdateMap(Conversions.StringToLatLon(_options.locationOptions.latitudeLongitude), zoom);
 		}
 
 		/// <summary>
@@ -499,7 +500,7 @@ namespace Mapbox.Unity.Map
 			MapOnStartRoutine();
 		}
 
-        private void MapOnAwakeRoutine()
+		private void MapOnAwakeRoutine()
 		{
 			// Destroy any ghost game objects.
 			DestroyChildObjects();
@@ -646,6 +647,7 @@ namespace Mapbox.Unity.Map
 				_imagery.Factory,
 				_vectorData.Factory
 			};
+
 			InitializeMap(_options);
 		}
 
@@ -714,8 +716,7 @@ namespace Mapbox.Unity.Map
 			Options = options;
 			_worldHeightFixed = false;
 			_fileSource = MapboxAccess.Instance;
-			Debug.Log("1");
-			_centerLatitudeLongitude = new Vector2d(SingletonLatLng.instance.LatSensor[0], SingletonLatLng.instance.LngSensor[0]);
+			_centerLatitudeLongitude = Conversions.StringToLatLon(options.locationOptions.latitudeLongitude);
 			_initialZoom = (int)options.locationOptions.zoom;
 
 			options.scalingOptions.scalingStrategy.SetUpScaling(this);
