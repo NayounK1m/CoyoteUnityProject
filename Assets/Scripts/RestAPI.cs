@@ -57,10 +57,7 @@ public class RestAPI : MonoBehaviour
 
             Debug.Log("double: "+latitude + ", " + logitude);
 
-            SingletonLatLng.instance.LatSensor[1] = latitude;
-            SingletonLatLng.instance.LngSensor[1] = logitude;
-
-            Debug.Log(SingletonLatLng.instance.LatSensor[1] + ", " + SingletonLatLng.instance.LngSensor[0]);
+            SingletonLatLng.instance.AddLatLng(latitude, logitude);
 
         }
         catch (WebException e)
