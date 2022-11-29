@@ -36,7 +36,13 @@ public class SingletonLatLng : MonoBehaviour
 
     public void AddLatLng(double lat, double lng)
     {
-     
-       
+        for (int i = 0; i < LatSensor.Length; i++)
+        {
+            if (LatSensor[i] == 0)
+                LatSensor[i] = lat;
+            else
+                Debug.Log(LatSensor[i]);
+        }
+
     }
 }
