@@ -21,6 +21,18 @@ public class Node : MonoBehaviour
         ws.Connect();//서버에 연결한다.
         ws.Send("goHome");
     }
+
+    public string SaveToString()
+    {
+        return JsonUtility.ToJson(this);
+        // Given:
+        // playerName = "Dr Charles"
+        // lives = 3
+        // health = 0.8f
+        // SaveToString returns:
+        // {"playerName":"Dr Charles","lives":3,"health":0.8}
+    }
+
     void ws_OnMessage(object sender, MessageEventArgs e)
     {
         /*
@@ -47,21 +59,25 @@ public class Node : MonoBehaviour
     ]
 }
          */
+
+
         Debug.Log(e.Data);//받은 메세지를 디버그 콘솔에 출력
 
         //파싱
-        string data = "40.4203008430482, -86.90254211425781"; //e.Data;
-        string[] codes  = data.Split(',');
+        string data = JsonUtility.ToJson(e.Data);
 
-        //string to double convert
-        NumberFormatInfo provider = new NumberFormatInfo();
-        provider.NumberDecimalSeparator = ".";
-        double latitude = System.Convert.ToDouble(codes[0], provider);
-        double longitude = System.Convert.ToDouble(codes[1], provider);
+        Debug.Log(data);
+        //string[] codes  = data.Split(',');
 
-        //save at singleton
-        SingletonLatLng.instance.Lat = latitude;
-        SingletonLatLng.instance.Lng = longitude;
+        ////string to double convert
+        //NumberFormatInfo provider = new NumberFormatInfo();
+        //provider.NumberDecimalSeparator = ".";
+        //double latitude = System.Convert.ToDouble(codes[0], provider);
+        //double longitude = System.Convert.ToDouble(codes[1], provider);
+
+        ////save at singleton
+        //SingletonLatLng.instance.Lat = latitude;
+        //SingletonLatLng.instance.Lng = longitude;
 
         notifyManager();
 
