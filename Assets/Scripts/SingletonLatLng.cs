@@ -7,8 +7,8 @@ using System.Globalization;
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;
-    public double Lat { get; set; }
-    public double Lng { get; set; }
+    public double[] Lat { get; set; }
+    public double[] Lng { get; set; }
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
 
@@ -44,6 +44,20 @@ public class SingletonLatLng : MonoBehaviour
                 LngSensor[i] = lng;
 
             Debug.Log("sensor" + i+ ": " +LatSensor[i] + ", " + LngSensor[i]);
+        }
+
+    }
+
+    public void AddCoyoteLatLng(double lat, double lng)
+    {
+        for (int i = 0; i < Lat.Length; i++)
+        {
+            if (Lat[i] == 0)
+                LatSensor[i] = lat;
+            if (Lng[i] == 0)
+                LngSensor[i] = lng;
+
+            Debug.Log("sensor" + i + ": " + LatSensor[i] + ", " + LngSensor[i]);
         }
 
     }

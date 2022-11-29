@@ -26,6 +26,7 @@
 
 		void Start()
 		{
+			//센서
 			_locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
 			for (int i = 0; i < 3; i++)

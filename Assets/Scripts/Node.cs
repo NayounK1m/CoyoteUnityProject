@@ -11,7 +11,15 @@ public class Node : MonoBehaviour
 {
     //Coyote Localization value
     private WebSocket ws;//소켓 선언
-    
+
+    [Serializable]
+    public class MyClass
+    {
+        public double x;
+        public double y;
+        public double time;
+        public string id;
+    }
     void Start()
     {
         ws = new WebSocket("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");// IP : 192.168.2.187, PORT : 3333
@@ -48,23 +56,40 @@ public class Node : MonoBehaviour
     ]
 }
          */
-
-
         Debug.Log(e.Data);//받은 메세지를 디버그 콘솔에 출력
 
         //파싱
         string data = e.Data;
-        string[] codes  = data.Split(',');
-
-        //string to double convert
+        string[] codes = data.Split('[');
+        string[] splitCodes = codes[1].Split('{');
         NumberFormatInfo provider = new NumberFormatInfo();
         provider.NumberDecimalSeparator = ".";
-        double latitude = System.Convert.ToDouble(codes[0], provider);
-        double longitude = System.Convert.ToDouble(codes[1], provider);
+        for (int i = 0; i < splitCodes.Length; i++)
+        {
+            switch (splitCodes.Length)
+            {
+                case 1:
+                    //SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(splitCodes[0], provider);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+        }
+        //string to double convert
+        //NumberFormatInfo provider = new NumberFormatInfo();
+        //provider.NumberDecimalSeparator = ".";
+        //double latitude = System.Convert.ToDouble(codes[0], provider);
+        //double longitude = System.Convert.ToDouble(codes[1], provider);
 
-        //save at singleton
-        SingletonLatLng.instance.Lat = latitude;
-        SingletonLatLng.instance.Lng = longitude;
+        ////save at singleton
+        //SingletonLatLng.instance.Lat[0] = myObject.x;
+        //SingletonLatLng.instance.Lng[0] = myObject.y;
 
         notifyManager();
 

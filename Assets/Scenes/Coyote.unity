@@ -860,7 +860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 400807825}
-  _locationStrings: []
   _spawnScale: 1
   _markerPrefab: {fileID: 2325279700009896024, guid: 9d2b42c131d19894ea9a5ce8f8d64f1a, type: 3}
 --- !u!114 &400807825 stripped
