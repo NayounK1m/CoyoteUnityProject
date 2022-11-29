@@ -62,6 +62,7 @@ public class Node : MonoBehaviour
         string data = e.Data;
         string[] codes = data.Split('[');
         string[] splitCodes = codes[1].Split('{');
+        
         NumberFormatInfo provider = new NumberFormatInfo();
         provider.NumberDecimalSeparator = ".";
         for (int i = 0; i < splitCodes.Length; i++)
@@ -69,11 +70,25 @@ public class Node : MonoBehaviour
             switch (splitCodes.Length)
             {
                 case 1:
-                    //SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(splitCodes[0], provider);
+                    string[] coyoteDataSplited1 = splitCodes[0].Split('"');
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited1[2], provider);
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited1[5], provider);
                     break;
                 case 2:
+                    string[] coyoteDataSplited2 = splitCodes[0].Split('"');
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited2[2], provider);
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited2[5], provider);
+                    SingletonLatLng.instance.Lat[1] = System.Convert.ToDouble(coyoteDataSplited2[16], provider);
+                    SingletonLatLng.instance.Lat[1] = System.Convert.ToDouble(coyoteDataSplited2[19], provider);
                     break;
                 case 3:
+                    string[] coyoteDataSplited3 = splitCodes[0].Split('"');
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited3[2], provider);
+                    SingletonLatLng.instance.Lat[0] = System.Convert.ToDouble(coyoteDataSplited3[5], provider);
+                    SingletonLatLng.instance.Lat[1] = System.Convert.ToDouble(coyoteDataSplited3[16], provider);
+                    SingletonLatLng.instance.Lat[1] = System.Convert.ToDouble(coyoteDataSplited3[19], provider);
+                    SingletonLatLng.instance.Lat[2] = System.Convert.ToDouble(coyoteDataSplited3[30], provider);
+                    SingletonLatLng.instance.Lat[2] = System.Convert.ToDouble(coyoteDataSplited3[33], provider);
                     break;
                 case 4:
                     break;
