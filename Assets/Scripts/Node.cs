@@ -22,17 +22,6 @@ public class Node : MonoBehaviour
         ws.Send("goHome");
     }
 
-    public string SaveToString()
-    {
-        return JsonUtility.ToJson(this);
-        // Given:
-        // playerName = "Dr Charles"
-        // lives = 3
-        // health = 0.8f
-        // SaveToString returns:
-        // {"playerName":"Dr Charles","lives":3,"health":0.8}
-    }
-
     void ws_OnMessage(object sender, MessageEventArgs e)
     {
         /*
