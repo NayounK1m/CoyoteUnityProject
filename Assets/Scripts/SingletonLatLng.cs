@@ -53,11 +53,11 @@ public class SingletonLatLng : MonoBehaviour
         for (int i = 0; i < Lat.Length; i++)
         {
             if (Lat[i] == 0)
-                LatSensor[i] = lat;
+                Lat[i] = lat;
             if (Lng[i] == 0)
-                LngSensor[i] = lng;
+                Lng[i] = lng;
 
-            Debug.Log("sensor" + i + ": " + LatSensor[i] + ", " + LngSensor[i]);
+            Debug.Log("Coyote" + i + ": " + Lat[i] + ", " + Lng[i]);
         }
 
     }
