@@ -11,8 +11,8 @@ public class SingletonLatLng : MonoBehaviour
     public double Lng { get; set; }
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
-    public double[] CoyoteLat { get; set; }
-    public double[] CoyoteLng { get; set; }
+    public double[] CoyoteLat = new double[5];
+    public double[] CoyoteLng = new double[5];
 
     // Start is called before the first frame update
     void Awake()
