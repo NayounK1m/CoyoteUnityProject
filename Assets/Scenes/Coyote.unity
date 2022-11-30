@@ -862,6 +862,7 @@ MonoBehaviour:
   _map: {fileID: 400807825}
   _spawnScale: 0.3
   _markerPrefab: {fileID: 2325279700009896024, guid: 9d2b42c131d19894ea9a5ce8f8d64f1a, type: 3}
+  _coyotePrefab: {fileID: 1111785780636424, guid: 621a5ce36fa0d934c99a9721be2bac19, type: 3}
 --- !u!114 &400807825 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b, type: 3}
