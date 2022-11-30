@@ -56,29 +56,31 @@ public class RestAPI : MonoBehaviour
                     case 1:
                         string[] coyoteDataSplited1 = splitCodes[0].Split('"');
                         SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited1[2], provider),
-                            System.Convert.ToDouble(coyoteDataSplited1[5], provider));
+                            System.Convert.ToDouble(coyoteDataSplited1[6], provider));
                         break;
                     case 2:
                         string[] coyoteDataSplited2 = splitCodes[0].Split('"');
-                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[2], provider),
-                            System.Convert.ToDouble(coyoteDataSplited2[5], provider));
-                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[16], provider),
-                            System.Convert.ToDouble(coyoteDataSplited2[19], provider));
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[18], provider),
+                            System.Convert.ToDouble(coyoteDataSplited2[22], provider));
                         break;
                     case 3:
                         string[] coyoteDataSplited3 = splitCodes[0].Split('"');
-                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[2], provider),
-                            System.Convert.ToDouble(coyoteDataSplited3[5], provider));
-                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[16], provider),
-                            System.Convert.ToDouble(coyoteDataSplited3[19], provider));
-                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[30], provider),
-                            System.Convert.ToDouble(coyoteDataSplited3[33], provider));
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[34], provider),
+                            System.Convert.ToDouble(coyoteDataSplited3[38], provider));
                         break;
                     case 4:
+                        string[] coyoteDataSplited4 = splitCodes[0].Split('"');
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited4[50], provider),
+                            System.Convert.ToDouble(coyoteDataSplited4[54], provider));
                         break;
                     case 5:
+                        string[] coyoteDataSplited5 = splitCodes[0].Split('"');
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited5[66], provider),
+                            System.Convert.ToDouble(coyoteDataSplited5[70], provider));
                         break;
                 }
+
+                Debug.Log("Coyote History" + i +" : "+ SingletonLatLng.instance.CoyoteLat[i] + ", " + SingletonLatLng.instance.CoyoteLng[i]);
             }
 
         }
