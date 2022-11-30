@@ -21,6 +21,85 @@ public class RestAPI : MonoBehaviour
         }
         if (failed == false)
             SceneManager.LoadScene("Coyote");
+
+        GetAllCoyoteHistory("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");
+    }
+
+    public void GetAllCoyoteHistory(string sendurl)
+    {
+        HttpWebRequest httpWebRequest = WebRequest.Create(new Uri(sendurl)) as HttpWebRequest;
+        httpWebRequest.Method = "POST";
+        httpWebRequest.ContentType = "application/json; charset=utf-8";
+
+        string msg = "";
+
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(msg);
+        httpWebRequest.ContentLength = (long)bytes.Length;
+        using (Stream requestStream = httpWebRequest.GetRequestStream())
+            requestStream.Write(bytes, 0, bytes.Length);
+
+        string result = null;
+        try
+        {
+            using (HttpWebResponse response = httpWebRequest.GetResponse() as HttpWebResponse)
+                result = new StreamReader(response.GetResponseStream()).ReadToEnd().ToString();
+
+            Debug.Log(result);
+            string[] codes = result.Split('[');
+            string[] splitCodes = codes[1].Split('{');
+            NumberFormatInfo provider = new NumberFormatInfo();
+            provider.NumberDecimalSeparator = ".";
+            for (int i = 0; i < splitCodes.Length; i++)
+            {
+                switch (splitCodes.Length)
+                {
+                    case 1:
+                        string[] coyoteDataSplited1 = splitCodes[0].Split('"');
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited1[2], provider),
+                            System.Convert.ToDouble(coyoteDataSplited1[5], provider));
+                        break;
+                    case 2:
+                        string[] coyoteDataSplited2 = splitCodes[0].Split('"');
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[2], provider),
+                            System.Convert.ToDouble(coyoteDataSplited2[5], provider));
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[16], provider),
+                            System.Convert.ToDouble(coyoteDataSplited2[19], provider));
+                        break;
+                    case 3:
+                        string[] coyoteDataSplited3 = splitCodes[0].Split('"');
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[2], provider),
+                            System.Convert.ToDouble(coyoteDataSplited3[5], provider));
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[16], provider),
+                            System.Convert.ToDouble(coyoteDataSplited3[19], provider));
+                        SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[30], provider),
+                            System.Convert.ToDouble(coyoteDataSplited3[33], provider));
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                }
+            }
+
+        }
+        catch (WebException e)
+        {
+            failed = true;
+            Debug.Log(e.Message);
+            if (FailedLoadPanel.gameObject.activeSelf == false)
+            {
+                FailedLoadPanel.gameObject.SetActive(true);
+                FailedText.text = "Failed to load. \n" + e.Message;
+            }
+
+        }
+        catch (Exception e)
+        {
+            failed = true;
+            Debug.Log("Failed to load: " + e.Message);
+            if (FailedLoadPanel.gameObject.activeSelf == false)
+                FailedLoadPanel.gameObject.SetActive(true);
+        }
     }
 
     public void GetAllSensorLatLng(string sendurl, int sensorNumber)

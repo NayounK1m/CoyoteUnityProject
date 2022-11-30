@@ -7,17 +7,12 @@ using System.Globalization;
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;
-    public double[] Lat { get; set; }
-    public double[] Lng { get; set; }
+    public double Lat { get; set; }
+    public double Lng { get; set; }
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
-
-    //public double LatSensor1 {get; set;}
-    //public double LngSensor1 {get; set;}
-    //public double LatSensor2 {get; set;}
-    //public double LngSensor2 {get; set;}
-    //public double LatSensor3 {get; set;}
-    //public double LngSensor3 {get; set;}
+    public double[] CoyoteLat { get; set; }
+    public double[] CoyoteLng { get; set; }
 
     // Start is called before the first frame update
     void Awake()
@@ -50,14 +45,14 @@ public class SingletonLatLng : MonoBehaviour
 
     public void AddCoyoteLatLng(double lat, double lng)
     {
-        for (int i = 0; i < Lat.Length; i++)
+        for (int i = 0; i < CoyoteLat.Length; i++)
         {
-            if (Lat[i] == 0)
-                Lat[i] = lat;
-            if (Lng[i] == 0)
-                Lng[i] = lng;
+            if (CoyoteLat[i] == 0)
+                CoyoteLat[i] = lat;
+            if (CoyoteLng[i] == 0)
+                CoyoteLng[i] = lng;
 
-            Debug.Log("Coyote" + i + ": " + Lat[i] + ", " + Lng[i]);
+            Debug.Log("Coyote" + i + ": " + CoyoteLat[i] + ", " + CoyoteLng[i]);
         }
 
     }

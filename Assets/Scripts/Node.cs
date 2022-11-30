@@ -22,7 +22,7 @@ public class Node : MonoBehaviour
     }
     void Start()
     {
-        ws = new WebSocket("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");// IP : 192.168.2.222, PORT : 3333
+        ws = new WebSocket("ws://192.168.2.222:3333");// IP : 192.168.2.187, PORT : 3333
         ws.OnOpen += ws_OnOpen;//서버가 연결된 경우 실행할 함수를 등록한다
         ws.OnMessage += ws_OnMessage; //서버에서 유니티 쪽으로 메세지가 올 경우 실행할 함수를 등록한다.
         ws.OnClose += ws_OnClose;//서버가 닫힌 경우 실행할 함수를 등록한다.
@@ -30,57 +30,24 @@ public class Node : MonoBehaviour
         ws.Send("goHome");
     }
 
+    //실시간
     void ws_OnMessage(object sender, MessageEventArgs e)
     {
         Debug.Log(e.Data);//받은 메세지를 디버그 콘솔에 출력
 
         //파싱
         string data = e.Data;
-        string[] codes = data.Split('[');
-        string[] splitCodes = codes[1].Split('{');
-        
+        string[] codes = data.Split(',');
+
+        //string to double convert
         NumberFormatInfo provider = new NumberFormatInfo();
         provider.NumberDecimalSeparator = ".";
-        for (int i = 0; i < splitCodes.Length; i++)
-        {
-            switch (splitCodes.Length)
-            {
-                case 1:
-                    string[] coyoteDataSplited1 = splitCodes[0].Split('"');
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited1[2], provider),
-                        System.Convert.ToDouble(coyoteDataSplited1[5], provider));
-                    break;
-                case 2:
-                    string[] coyoteDataSplited2 = splitCodes[0].Split('"');
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[2], provider),
-                        System.Convert.ToDouble(coyoteDataSplited2[5], provider));
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[16], provider),
-                        System.Convert.ToDouble(coyoteDataSplited2[19], provider));
-                    break;
-                case 3:
-                    string[] coyoteDataSplited3 = splitCodes[0].Split('"');
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[2], provider),
-                        System.Convert.ToDouble(coyoteDataSplited3[5], provider));
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[16], provider),
-                        System.Convert.ToDouble(coyoteDataSplited3[19], provider));
-                    SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[30], provider),
-                        System.Convert.ToDouble(coyoteDataSplited3[33], provider));
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-            }
-        }
-        //string to double convert
-        //NumberFormatInfo provider = new NumberFormatInfo();
-        //provider.NumberDecimalSeparator = ".";
-        //double latitude = System.Convert.ToDouble(codes[0], provider);
-        //double longitude = System.Convert.ToDouble(codes[1], provider);
+        double latitude = System.Convert.ToDouble(codes[0], provider);
+        double longitude = System.Convert.ToDouble(codes[1], provider);
 
-        ////save at singleton
-        //SingletonLatLng.instance.Lat[0] = myObject.x;
-        //SingletonLatLng.instance.Lng[0] = myObject.y;
+        //save at singleton
+        SingletonLatLng.instance.Lat = latitude;
+        SingletonLatLng.instance.Lng = longitude;
 
         notifyManager();
 
@@ -110,10 +77,10 @@ public class Node : MonoBehaviour
 
     void ws_OnOpen(object sender, System.EventArgs e)
     {
-        Debug.Log("open"); 
+        Debug.Log("open");
     }
     void ws_OnClose(object sender, CloseEventArgs e)
     {
-        Debug.Log("close"); 
+        Debug.Log("close");
     }
 }
