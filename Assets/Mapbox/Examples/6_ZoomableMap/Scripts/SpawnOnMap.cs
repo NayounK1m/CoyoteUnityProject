@@ -13,7 +13,7 @@
 		AbstractMap _map;
 
 		[Geocode]
-		string[] _locationStrings;
+		string[] _locationStrings = new string[3];
 		Vector2d[] _locations;
 
 		[SerializeField]
@@ -29,7 +29,7 @@
 			//센서
 			_locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < _locationStrings.Length; i++)
 			{
 				var locationString = SingletonLatLng.instance.LatSensor[i] + "," + SingletonLatLng.instance.LngSensor[i];
 				_locations[i] = Conversions.StringToLatLon(locationString);

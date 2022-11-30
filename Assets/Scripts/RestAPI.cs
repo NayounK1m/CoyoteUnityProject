@@ -21,8 +21,8 @@ public class RestAPI : MonoBehaviour
         }
         GetAllCoyoteHistory("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");
 
-        //if (failed == false)
-            //SceneManager.LoadScene("Coyote");
+        if (failed == false)
+            SceneManager.LoadScene("Coyote");
     }
 
     public void GetAllCoyoteHistory(string sendurl)
@@ -62,37 +62,6 @@ public class RestAPI : MonoBehaviour
                 dataLength = 5;
 
             SaveToSingleton(splitCodes, dataLength);
-            //switch (dataLength)
-            //    {
-            //        case 1:
-            //        SaveToSingleton(splitCodes, dataLength);
-            //        Debug.Log("1");
-            //            break;
-            //        case 2:
-            //        SaveToSingleton(splitCodes, dataLength);
-            //        Debug.Log("2");
-            //            break;
-            //        case 3:
-            //            string[] coyoteDataSplited3 = splitCodes[5].Split('/');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[0], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited3[1], provider), 3);
-            //            Debug.Log("3");
-            //            break;
-            //        case 4:
-            //            string[] coyoteDataSplited4 = splitCodes[7].Split('/');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited4[0], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited4[1], provider), 4);
-            //            Debug.Log("4");
-            //            break;
-            //        case 5:
-            //            string[] coyoteDataSplited5 = splitCodes[9].Split('/');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited5[0], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited5[1], provider), 5);
-            //            Debug.Log("5");
-            //            break;
-            //        default:
-            //            break;
-            //    }
 
         }
         catch (WebException e)
@@ -122,21 +91,12 @@ public class RestAPI : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            if (i != 1)
-            {
-                int num = count + (count - 1);
-                string[] coyoteDataSplited = splitcodes[num].Split('/');
-                SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
-                System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
-            }
-            else if (i == 1)
-            {
-                string[] coyoteDataSplited = splitcodes[i].Split('/');
-                SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
-                System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
-            }
+            int num = 2 * i + 1;
+            string[] coyoteDataSplited = splitcodes[num].Split('/');
+            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
+            System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
 
-            Debug.Log(i);
+            Debug.Log(i+1);
         }
     }
 
@@ -174,7 +134,7 @@ public class RestAPI : MonoBehaviour
 
             //Debug.Log("double: "+latitude + ", " + logitude);
 
-            SingletonLatLng.instance.AddLatLng(latitude, logitude);
+            SingletonLatLng.instance.AddLatLng(latitude, logitude, sensorNumber);
 
         }
         catch (WebException e)

@@ -54,11 +54,13 @@ namespace Mapbox.Unity.Utilities
 
 			if (!double.TryParse(latLonSplit[0], NumberStyles.Any, NumberFormatInfo.InvariantInfo, out latitude))
 			{
+				Debug.Log(string.Format("Could not convert latitude to double: {0}", latLonSplit[0]));
 				throw new Exception(string.Format("Could not convert latitude to double: {0}", latLonSplit[0]));
 			}
 
 			if (!double.TryParse(latLonSplit[1], NumberStyles.Any, NumberFormatInfo.InvariantInfo, out longitude))
 			{
+				Debug.Log(string.Format("Could not convert longitude to double: {0}", latLonSplit[0]));
 				throw new Exception(string.Format("Could not convert longitude to double: {0}", latLonSplit[0]));
 			}
 

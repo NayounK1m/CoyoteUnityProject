@@ -29,17 +29,11 @@ public class SingletonLatLng : MonoBehaviour
         }
     }
 
-    public void AddLatLng(double lat, double lng)
+    public void AddLatLng(double lat, double lng, int sensorNum)
     {
-        for (int i = 0; i < LatSensor.Length; i++)
-        {
-            if (LatSensor[i] == 0)
-                LatSensor[i] = lat;
-            if (LngSensor[i] == 0)
-                LngSensor[i] = lng;
-
-            Debug.Log("sensor" + i+ ": " +LatSensor[i] + ", " + LngSensor[i]);
-        }
+        LatSensor.SetValue(lat, sensorNum-1);
+        LngSensor.SetValue(lng, sensorNum-1);
+        Debug.Log("Sensor" + sensorNum + ": " + lat + ", " + lng);
 
     }
 
