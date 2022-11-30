@@ -48,41 +48,51 @@ public class RestAPI : MonoBehaviour
             string[] code = codes[1].Split(']');
             Debug.Log(code[0]);
             string[] splitCodes = code[0].Split('"');
-            NumberFormatInfo provider = new NumberFormatInfo();
-            //provider.NumberDecimalSeparator = ".";
-            //for (int i = 0; i < dataLength; i++)
-            //{
-            //    switch (dataLength)
+
+            int dataLength = 0;
+            if (splitCodes[3] == null)
+                dataLength = 1;
+            else if (splitCodes[5] == null)
+                dataLength = 2;
+            else if (splitCodes[7] == null)
+                dataLength = 3;
+            else if (splitCodes[9] == null)
+                dataLength = 4;
+            else if (splitCodes[9] != null)
+                dataLength = 5;
+
+            SaveToSingleton(splitCodes, dataLength);
+            //switch (dataLength)
             //    {
             //        case 1:
-            //            string[] coyoteDataSplited1 = splitCodes[0].Split('"');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited1[2], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited1[6], provider));
+            //        SaveToSingleton(splitCodes, dataLength);
+            //        Debug.Log("1");
             //            break;
             //        case 2:
-            //            string[] coyoteDataSplited2 = splitCodes[0].Split('"');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited2[18], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited2[22], provider));
+            //        SaveToSingleton(splitCodes, dataLength);
+            //        Debug.Log("2");
             //            break;
             //        case 3:
-            //            string[] coyoteDataSplited3 = splitCodes[0].Split('"');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[34], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited3[38], provider));
+            //            string[] coyoteDataSplited3 = splitCodes[5].Split('/');
+            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited3[0], provider),
+            //                System.Convert.ToDouble(coyoteDataSplited3[1], provider), 3);
+            //            Debug.Log("3");
             //            break;
             //        case 4:
-            //            string[] coyoteDataSplited4 = splitCodes[0].Split('"');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited4[50], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited4[54], provider));
+            //            string[] coyoteDataSplited4 = splitCodes[7].Split('/');
+            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited4[0], provider),
+            //                System.Convert.ToDouble(coyoteDataSplited4[1], provider), 4);
+            //            Debug.Log("4");
             //            break;
             //        case 5:
-            //            string[] coyoteDataSplited5 = splitCodes[0].Split('"');
-            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited5[66], provider),
-            //                System.Convert.ToDouble(coyoteDataSplited5[70], provider));
+            //            string[] coyoteDataSplited5 = splitCodes[9].Split('/');
+            //            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited5[0], provider),
+            //                System.Convert.ToDouble(coyoteDataSplited5[1], provider), 5);
+            //            Debug.Log("5");
+            //            break;
+            //        default:
             //            break;
             //    }
-
-            //    Debug.Log("Coyote History" + i + " : " + SingletonLatLng.instance.CoyoteLat[i] + ", " + SingletonLatLng.instance.CoyoteLng[i]);
-            //}
 
         }
         catch (WebException e)
@@ -102,6 +112,31 @@ public class RestAPI : MonoBehaviour
             Debug.Log("Failed to load: " + e.Message);
             if (FailedLoadPanel.gameObject.activeSelf == false)
                 FailedLoadPanel.gameObject.SetActive(true);
+        }
+    }
+
+    public void SaveToSingleton(string[] splitcodes, int count)
+    {
+        NumberFormatInfo provider = new NumberFormatInfo();
+        provider.NumberDecimalSeparator = ".";
+
+        for (int i = 0; i < count; i++)
+        {
+            if (i != 1)
+            {
+                int num = count + (count - 1);
+                string[] coyoteDataSplited = splitcodes[num].Split('/');
+                SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
+                System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
+            }
+            else if (i == 1)
+            {
+                string[] coyoteDataSplited = splitcodes[i].Split('/');
+                SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
+                System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
+            }
+
+            Debug.Log(i);
         }
     }
 

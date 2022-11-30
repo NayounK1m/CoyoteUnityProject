@@ -43,16 +43,15 @@ public class SingletonLatLng : MonoBehaviour
 
     }
 
-    public void AddCoyoteLatLng(double lat, double lng)
+    public void AddCoyoteLatLng(double lat, double lng, int count)
     {
-        for (int i = 0; i < CoyoteLat.Length; i++)
+        if (CoyoteLat[count] != 0)
+            return;
+        else
         {
-            if (CoyoteLat[i] == 0)
-                CoyoteLat[i] = lat;
-            if (CoyoteLng[i] == 0)
-                CoyoteLng[i] = lng;
-
-            Debug.Log("Coyote" + i + ": " + CoyoteLat[i] + ", " + CoyoteLng[i]);
+            CoyoteLat.SetValue(lat, count);
+            CoyoteLng.SetValue(lng, count);
+            Debug.Log("Coyote" + count + ": " + CoyoteLat[count] + ", " + CoyoteLng[count]);
         }
 
     }
