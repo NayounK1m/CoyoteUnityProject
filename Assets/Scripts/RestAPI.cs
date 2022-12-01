@@ -94,11 +94,17 @@ public class RestAPI : MonoBehaviour
         {
             int num = 2 * i + 1;
             string[] coyoteDataSplited = splitcodes[num].Split('/');
-            SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
-            System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
-
-            Debug.Log(i+1);
+            //SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
+            //System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
+            SingletonLatLng.instance.CoyoteLat.Add(System.Convert.ToDouble(coyoteDataSplited[0], provider));
+            SingletonLatLng.instance.CoyoteLng.Add(System.Convert.ToDouble(coyoteDataSplited[1], provider));
         }
+        SingletonLatLng.instance.CoyoteLat.ForEach(delegate (double num) {
+            Debug.Log("Rest Lat: " + num);
+        });
+        SingletonLatLng.instance.CoyoteLng.ForEach(delegate (double num) {
+            Debug.Log("Rest Lng: " + num);
+        });
     }
 
     public void GetAllSensorLatLng(string sendurl, int sensorNumber)

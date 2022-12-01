@@ -51,7 +51,7 @@
 			_spawnedCoyoteObjects = new List<GameObject>();
 			for (int i = 0; i < _locationCoyoteStrings.Length; i++)
             {
-                var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
+				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
 				_locationsCoyote[i] = Conversions.StringToLatLon(locationString);
                 var instance = Instantiate(_coyotePrefab);
                 instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
