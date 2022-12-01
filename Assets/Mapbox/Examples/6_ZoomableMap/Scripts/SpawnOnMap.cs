@@ -76,13 +76,16 @@
                 spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
             }
 
-			int countCoyote = SingletonLatLng.instance.CoyoteLat.Count;
+			int countCoyote = _spawnedCoyoteObjects.Count;
 			//여태까지 소환된 모델 수 만큼 반복
 			for (int i = 0; i < countCoyote; i++)
 			{
 				//여태까지 소환된 모델들 다 월드 포지션 --> 로컬 포지션 변환, 월드 사이즈 --> 로컬 사이즈 변환
 				var spawnedCoyoteObject = _spawnedCoyoteObjects[i];
-				var locationCoyote = _locationsCoyote[i];
+				Vector2d[] _locationsCoyoteUpdate = new Vector2d[SingletonLatLng.instance.CoyoteLat.Count];
+				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
+				_locationsCoyoteUpdate[i] = Conversions.StringToLatLon(locationString);
+				var locationCoyote = _locationsCoyoteUpdate[i];
 				spawnedCoyoteObject.transform.localPosition = _map.GeoToWorldPosition(locationCoyote, true);
 				spawnedCoyoteObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 			}
@@ -91,33 +94,12 @@
 			if (_spawnedCoyoteObjects.Count < SingletonLatLng.instance.CoyoteLat.Count)
 			{
 				//추가되는 코드
-				int index = SingletonLatLng.instance.CoyoteLat.Count - _spawnedCoyoteObjects.Count;//차이가 1일 경우
 				var locationString = SingletonLatLng.instance.CoyoteLat[SingletonLatLng.instance.CoyoteLat.Count -1] + "," + SingletonLatLng.instance.CoyoteLng[SingletonLatLng.instance.CoyoteLat.Count - 1];
 				var instance = Instantiate(_newCoyotePrefab); //_locationsCoyote[index]
 				instance.transform.localPosition = _map.GeoToWorldPosition(Conversions.StringToLatLon(locationString), true);
 				instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 				_spawnedCoyoteObjects.Add(instance);
 			}
-
-			////실시간 코요태 추가
-			//if(_spawnedCoyoteObjects.Count < SingletonLatLng.instance.CoyoteLat.Count)
-			//         {
-			//	_locationsCoyote = new Vector2d[_locationCoyoteStrings.Length];
-			//	for (int i = 0; i < _locationCoyoteStrings.Length; i++)
-			//	{
-			//		var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
-			//		_locationsCoyote[i] = Conversions.StringToLatLon(locationString);
-
-			//		//소환 + 소환한 모델에 속성(좌표, 사이즈 지정)
-			//		var instance = Instantiate(_newCoyotePrefab);
-			//		instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
-			//		instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
-			//		//소환된 모델들 리스트 추가
-			//		_spawnedCoyoteObjects.Add(instance);
-			//	}
-
-			//}
 		}
 	}
 }
