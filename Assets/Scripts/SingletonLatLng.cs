@@ -49,9 +49,16 @@ public class SingletonLatLng : MonoBehaviour
             for (int i = 0; i < dataLength; i++)
             {
                 CoyoteLat.SetValue(CoyoteLat[i], i + 1);
+                CoyoteLng.SetValue(CoyoteLng[i], i + 1);
             }
         }
         CoyoteLat.SetValue(newCoyoteLat, 0);
+        CoyoteLat.SetValue(newCoyoteLng, 0);
+
+        for (int i = 0; i < dataLength; i++)
+        {
+            Debug.Log(CoyoteLat[i] + ", " + CoyoteLng[i]);
+        }
 
     }
 
