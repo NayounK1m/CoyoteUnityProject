@@ -28,6 +28,63 @@ public class SingletonLatLng : MonoBehaviour
                 Destroy(this.gameObject); //둘 이상 존재하면 안되는 객체이니 방금 AWake된 자신을 삭제 
         }
     }
+    public void SwapCoyoteArr(double newCoyoteLat, double newCoyoteLng)
+    {
+        int dataLength = 0;
+        if (CoyoteLat[0] == 0)
+            dataLength = 1;
+        else if (CoyoteLat[1] == 0)
+            dataLength = 2;
+        else if (CoyoteLat[2] == 0)
+            dataLength = 3;
+        else if (CoyoteLat[3] == 0)
+            dataLength = 4;
+        else if (CoyoteLat[4] != 0)
+            dataLength = 5;
+
+        if (CoyoteLat[0] != 0)
+        {
+            for (int i = 0; i < dataLength; i++)
+            {
+                CoyoteLat.SetValue(CoyoteLat[i], i + 1);
+            }
+        }
+        CoyoteLat.SetValue(newCoyoteLat, 0);
+
+        //else if(CoyoteLat[1] == 0)
+        //{
+        //    CoyoteLat.SetValue(CoyoteLat[0], 1);
+        //    CoyoteLat.SetValue(newCoyoteLat, 0);
+        //}
+        //else if (CoyoteLat[2] == 0)
+        //{
+        //    CoyoteLat.SetValue(CoyoteLat[1], 2);
+        //    CoyoteLat.SetValue(CoyoteLat[0], 1);
+        //    CoyoteLat.SetValue(newCoyoteLat, 0);
+        //}
+        //else if (CoyoteLat[3] == 0)
+        //{
+        //    CoyoteLat.SetValue(CoyoteLat[2], 3);
+        //    CoyoteLat.SetValue(CoyoteLat[1], 2);
+        //    CoyoteLat.SetValue(CoyoteLat[0], 1);
+        //    CoyoteLat.SetValue(newCoyoteLat, 0);
+        //}
+        //else if (CoyoteLat[4] == 0)
+        //{
+        //    CoyoteLat.SetValue(CoyoteLat[3], 4);
+        //    CoyoteLat.SetValue(CoyoteLat[2], 3);
+        //    CoyoteLat.SetValue(CoyoteLat[1], 2);
+        //    CoyoteLat.SetValue(CoyoteLat[0], 1);
+        //    CoyoteLat.SetValue(newCoyoteLat, 0);
+        //}
+        
+
+        //for (int i = 0; i< dataLength; )
+        //{
+        //    CoyoteLat.SetValue(newCoyoteLat, 0);
+        //}
+
+    }
 
     public void AddLatLng(double lat, double lng, int sensorNum)
     {

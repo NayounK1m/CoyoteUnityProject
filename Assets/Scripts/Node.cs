@@ -49,10 +49,10 @@ public class Node : MonoBehaviour
         SingletonLatLng.instance.Lat = latitude;
         SingletonLatLng.instance.Lng = longitude;
 
-        notifyManager();
-
         Debug.Log(SingletonLatLng.instance.Lat);
         Debug.Log(SingletonLatLng.instance.Lng);
+
+        notifyManager();
     }
 
     public void notifyManager()
