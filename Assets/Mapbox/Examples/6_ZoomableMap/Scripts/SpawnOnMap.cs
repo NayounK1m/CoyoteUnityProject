@@ -52,12 +52,9 @@
 			for (int i = 0; i < _locationCoyoteStrings.Length; i++)
             {
                 var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
-                Debug.Log(locationString);
 				_locationsCoyote[i] = Conversions.StringToLatLon(locationString);
-                Debug.Log(_locationsCoyote[i]);
                 var instance = Instantiate(_coyotePrefab);
-                instance.transform.localPosition = _map.GeoToWorldPosition(new Vector2d(5, 20), true);
-                Debug.Log(instance.transform.localPosition);
+                instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
                 instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 				_spawnedCoyoteObjects.Add(instance);
             }

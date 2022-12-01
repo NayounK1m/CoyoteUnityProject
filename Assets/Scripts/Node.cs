@@ -12,14 +12,6 @@ public class Node : MonoBehaviour
     //Coyote Localization value
     private WebSocket ws;//소켓 선언
 
-    [Serializable]
-    public class MyClass
-    {
-        public double x;
-        public double y;
-        public double time;
-        public string id;
-    }
     void Start()
     {
         ws = new WebSocket("ws://192.168.2.222:3333");// IP : 192.168.2.187, PORT : 3333
@@ -40,19 +32,21 @@ public class Node : MonoBehaviour
         string[] codes = data.Split(',');
 
         //string to double convert
+        Debug.Log(codes[0] + " -split- " + codes[1]);
         NumberFormatInfo provider = new NumberFormatInfo();
         provider.NumberDecimalSeparator = ".";
         double latitude = System.Convert.ToDouble(codes[0], provider);
         double longitude = System.Convert.ToDouble(codes[1], provider);
+        Debug.Log(latitude + " +double+ " + longitude);
 
         //save at singleton
         SingletonLatLng.instance.Lat = latitude;
         SingletonLatLng.instance.Lng = longitude;
+        Debug.Log(SingletonLatLng.instance.Lat);
+        Debug.Log(SingletonLatLng.instance.Lng);
 
         SingletonLatLng.instance.SwapCoyoteArr(latitude, longitude);
 
-        Debug.Log(SingletonLatLng.instance.Lat);
-        Debug.Log(SingletonLatLng.instance.Lng);
         notifyManager();
     }
 
