@@ -16,10 +16,12 @@ public class RestAPI : MonoBehaviour
     {
         for (int i= 1; i<4; i++)
         {
-            string url = "http://192.168.2.222:8081/api/sensors/getSound" + i + "Coord";
+            string url = "http://127.0.0.1:8081/api/sensors/getSound" + i + "Coord";
+            //string url = "https://coyote-production.up.railway.app/api/sensors/getSound" + i + "Coord";
             GetAllSensorLatLng(url, i);
         }
-        GetAllCoyoteHistory("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");
+        GetAllCoyoteHistory("http://127.0.0.1:8081/api/coyotes/getInitialCoyotes");
+        //GetAllCoyoteHistory("https://coyote-production.up.railway.app/api/coyotes/getInitialCoyotes");
 
         if (failed == false)
             SceneManager.LoadScene("Coyote");
@@ -127,19 +129,19 @@ public class RestAPI : MonoBehaviour
             using (HttpWebResponse response = httpWebRequest.GetResponse() as HttpWebResponse)
                 result = new StreamReader(response.GetResponseStream()).ReadToEnd().ToString();
 
-            //Debug.Log(result);
+            Debug.Log(result);
             string[] splitResult = result.Split('"');
             string lat = splitResult[7];
             string lng = splitResult[11];
 
-            //Debug.Log(lat + ", " + lng);
+            Debug.Log(lat + ", " + lng);
 
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
             double latitude = System.Convert.ToDouble(lat, provider);
             double logitude = System.Convert.ToDouble(lng, provider);
 
-            //Debug.Log("double: "+latitude + ", " + logitude);
+            Debug.Log("double: "+latitude + ", " + logitude);
 
             SingletonLatLng.instance.AddLatLng(latitude, logitude, sensorNumber);
 
@@ -155,12 +157,12 @@ public class RestAPI : MonoBehaviour
             }
 
         }
-        catch (Exception e)
-        {
-            failed = true;
-            Debug.Log("Failed to load: " + e.Message);
-            if (FailedLoadPanel.gameObject.activeSelf == false)
-                FailedLoadPanel.gameObject.SetActive(true);
-        }
+        //catch (Exception e)
+        //{
+        //    failed = true;
+        //    Debug.Log("Failed to load: " + e.Message);
+        //    if (FailedLoadPanel.gameObject.activeSelf == false)
+        //        FailedLoadPanel.gameObject.SetActive(true);
+        //}
     }
 }

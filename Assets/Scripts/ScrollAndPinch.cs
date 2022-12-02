@@ -1,6 +1,11 @@
+/*
+Set this on an empty game object positioned at (0,0,0) and attach your active camera.
+The script only runs on mobile devices or the remote app.
+*/
+
 using UnityEngine;
 
-class TouchManager : MonoBehaviour
+class ScrollAndPinch : MonoBehaviour
 {
 #if UNITY_IOS || UNITY_ANDROID
     public Camera Camera;
@@ -15,6 +20,7 @@ class TouchManager : MonoBehaviour
 
     private void Update()
     {
+
         //Update Plane
         if (Input.touchCount >= 1)
             Plane.SetNormalAndPosition(transform.up, transform.position);
@@ -26,7 +32,6 @@ class TouchManager : MonoBehaviour
         if (Input.touchCount >= 1)
         {
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
-            
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
                 Camera.transform.Translate(Delta1, Space.World);
         }
@@ -34,13 +39,14 @@ class TouchManager : MonoBehaviour
         //Pinch
         if (Input.touchCount >= 2)
         {
-            var pos1  = PlanePosition(Input.GetTouch(0).position);
-            var pos2  = PlanePosition(Input.GetTouch(1).position);
+            var pos1 = PlanePosition(Input.GetTouch(0).position);
+            var pos2 = PlanePosition(Input.GetTouch(1).position);
             var pos1b = PlanePosition(Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition);
             var pos2b = PlanePosition(Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition);
 
             //calc zoom
-            var zoom = Vector3.Distance(pos1, pos2) / Vector3.Distance(pos1b, pos2b);
+            var zoom = Vector3.Distance(pos1, pos2) /
+                       Vector3.Distance(pos1b, pos2b);
 
             //edge case
             if (zoom == 0 || zoom > 10)

@@ -1015,7 +1015,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2318d110fd5dbf42ad6c5ff6f41fe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoyoteNotify: 0
+  LatSensor:
+  - 0
+  - 0
+  - 0
+  LngSensor:
+  - 0
+  - 0
+  - 0
+  CoyoteLat: []
+  CoyoteLng: []
 --- !u!1 &2045935314
 GameObject:
   m_ObjectHideFlags: 0
