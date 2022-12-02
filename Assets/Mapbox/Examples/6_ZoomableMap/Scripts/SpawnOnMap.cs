@@ -12,7 +12,8 @@
 		[SerializeField]
 		AbstractMap _map;
 
-		int firstCoyoteCount;
+		[SerializeField]
+		Camera mainCamera;
 
 		[Geocode]
 		string[] _locationStrings = new string[3];
@@ -37,7 +38,6 @@
 
 		void Start()
 		{
-			firstCoyoteCount = _locationStrings.Length;
 			//센서
 			_locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
@@ -98,6 +98,8 @@
 				var instance = Instantiate(_newCoyotePrefab); //_locationsCoyote[index]
 				instance.transform.localPosition = _map.GeoToWorldPosition(Conversions.StringToLatLon(locationString), true);
 				instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+				mainCamera.transform.localPosition = new Vector3(instance.transform.localPosition.x, 30, instance.transform.localPosition.z);
 				_spawnedCoyoteObjects.Add(instance);
 			}
 		}
