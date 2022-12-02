@@ -157,12 +157,12 @@ public class RestAPI : MonoBehaviour
             }
 
         }
-        //catch (Exception e)
-        //{
-        //    failed = true;
-        //    Debug.Log("Failed to load: " + e.Message);
-        //    if (FailedLoadPanel.gameObject.activeSelf == false)
-        //        FailedLoadPanel.gameObject.SetActive(true);
-        //}
+        catch (Exception e)
+        {
+            failed = true;
+            Debug.Log("Failed to load: " + e.Message);
+            if (FailedLoadPanel.gameObject.activeSelf == false)
+                FailedLoadPanel.gameObject.SetActive(true);
+        }
     }
 }
