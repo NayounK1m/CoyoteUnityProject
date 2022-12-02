@@ -139,11 +139,11 @@ public class RestAPI : MonoBehaviour
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
             double latitude = System.Convert.ToDouble(lat, provider);
-            double logitude = System.Convert.ToDouble(lng, provider);
+            double longitude = System.Convert.ToDouble(lng, provider);
 
-            Debug.Log("double: "+latitude + ", " + logitude);
+            Debug.Log("double: "+latitude + ", " + longitude);
 
-            SingletonLatLng.instance.AddLatLng(latitude, logitude, sensorNumber);
+            SingletonLatLng.instance.AddLatLng(latitude, longitude, sensorNumber);
 
         }
         catch (WebException e)
