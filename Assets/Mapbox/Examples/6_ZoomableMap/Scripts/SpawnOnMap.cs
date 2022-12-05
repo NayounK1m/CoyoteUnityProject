@@ -20,7 +20,7 @@
 		Vector2d[] _locations;
 
 		[Geocode]
-		string[] _locationCoyoteStrings = new string[SingletonLatLng.instance.CoyoteLat.Count];
+		string[] _locationCoyoteStrings;
 		Vector2d[] _locationsCoyote;
 
 		[SerializeField]
@@ -52,9 +52,9 @@
 			}
 
 			//코요태
-			_locationsCoyote = new Vector2d[_locationCoyoteStrings.Length];
+			_locationsCoyote = new Vector2d[SingletonLatLng.instance.CoyoteLat.Count];
 			_spawnedCoyoteObjects = new List<GameObject>();
-			for (int i = 0; i < _locationCoyoteStrings.Length; i++)
+			for (int i = 0; i < SingletonLatLng.instance.CoyoteLat.Count; i++)
             {
 				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
 				_locationsCoyote[i] = Conversions.StringToLatLon(locationString);

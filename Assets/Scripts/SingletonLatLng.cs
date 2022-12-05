@@ -8,8 +8,6 @@ using System.Collections.Generic;
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;
-    public double Lat { get; set; }
-    public double Lng { get; set; }
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
     public List<double> CoyoteLat = new List<double>();

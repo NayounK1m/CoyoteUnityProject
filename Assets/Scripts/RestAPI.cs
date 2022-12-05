@@ -16,12 +16,10 @@ public class RestAPI : MonoBehaviour
     {
         for (int i= 1; i<4; i++)
         {
-            string url = "http://127.0.0.1:8081/api/sensors/getSound" + i + "Coord";
-            //string url = "https://coyote-production.up.railway.app/api/sensors/getSound" + i + "Coord";
+            string url = "http://192.168.2.222:8081/api/sensors/getSound" + i + "Coord";
             GetAllSensorLatLng(url, i);
         }
-        GetAllCoyoteHistory("http://127.0.0.1:8081/api/coyotes/getInitialCoyotes");
-        //GetAllCoyoteHistory("https://coyote-production.up.railway.app/api/coyotes/getInitialCoyotes");
+        GetAllCoyoteHistory("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");
 
         if (failed == false)
             SceneManager.LoadScene("Coyote");
@@ -96,8 +94,6 @@ public class RestAPI : MonoBehaviour
         {
             int num = 2 * i + 1;
             string[] coyoteDataSplited = splitcodes[num].Split('/');
-            //SingletonLatLng.instance.AddCoyoteLatLng(System.Convert.ToDouble(coyoteDataSplited[0], provider),
-            //System.Convert.ToDouble(coyoteDataSplited[1], provider), i);
             SingletonLatLng.instance.CoyoteLat.Add(System.Convert.ToDouble(coyoteDataSplited[0], provider));
             SingletonLatLng.instance.CoyoteLng.Add(System.Convert.ToDouble(coyoteDataSplited[1], provider));
         }
