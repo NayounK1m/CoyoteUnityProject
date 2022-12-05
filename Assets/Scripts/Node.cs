@@ -12,7 +12,7 @@
 
         void Start()
         {
-            ws = new WebSocket("ws://192.168.2.222:3333");// IP : 192.168.2.222, PORT : 3333
+            ws = new WebSocket("ws://127.0.0.1:3333");// IP : 192.168.2.222, PORT : 3333
             ws.OnOpen += ws_OnOpen;//서버가 연결된 경우 실행할 함수를 등록한다
             ws.OnMessage += ws_OnMessage; //서버에서 유니티 쪽으로 메세지가 올 경우 실행할 함수를 등록한다.
             ws.OnClose += ws_OnClose;//서버가 닫힌 경우 실행할 함수를 등록한다.
