@@ -37,8 +37,8 @@
             //save at singleton
             SingletonLatLng.instance.CoyoteLat.Add(latitude);
             SingletonLatLng.instance.CoyoteLng.Add(longitude);
-            SingletonLatLng.instance.CoyoteLat.ForEach(delegate (double lat) {  Debug.Log("Node: " + lat); });
-            SingletonLatLng.instance.CoyoteLng.ForEach(delegate (double lng){ Debug.Log("Node: " + lng); });
+            //SingletonLatLng.instance.CoyoteLat.ForEach(delegate (double lat) {  Debug.Log("Node: " + lat); });
+            //SingletonLatLng.instance.CoyoteLng.ForEach(delegate (double lng){ Debug.Log("Node: " + lng); });
 
             notifyManager();
         }
