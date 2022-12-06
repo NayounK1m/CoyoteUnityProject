@@ -1,47 +1,45 @@
-using System;
-using System.IO;
-using System.Net;
 using UnityEngine;
-using System.Globalization;
 using System.Collections.Generic;
 
+/* 
+ * // Singleton Pattern //
+ * Declares a variable called instance statically so that it can be retrieved from scripts within other objects
+ */
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;
+
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
+
     public List<double> CoyoteLat = new List<double>();
     public List<double> CoyoteLng = new List<double>();
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null) //instance가 null. 즉, 시스템상에 존재하고 있지 않을때 
+        if (instance == null) //The instance is null, that is, it does not exist on the system
         { 
-            instance = this; //내자신을 instance로 넣어줍니다.
-            DontDestroyOnLoad(gameObject); //OnLoad(씬이 로드 되었을때) 자신을 파괴하지 않고 유지 
+            instance = this; //put this scrpit(component) in an instance.
+            DontDestroyOnLoad(gameObject); //OnLoad Keeps this object Undestroyed
         } 
         else 
         { 
-            if (instance != this) //instance가 내가 아니라면 이미 instance가 하나 존재하고 있다는 의미 
-                Destroy(this.gameObject); //둘 이상 존재하면 안되는 객체이니 방금 AWake된 자신을 삭제 
+            if (instance != this) //If the instance is not this, it means that there is already have one instance
+                Destroy(this.gameObject); //Delete this object that has just been awaked because more than one object should not exist
         }
+
+        //List initialization and Clear
         CoyoteLat.Clear();
         CoyoteLng.Clear();
-
-        //CoyoteLat.ForEach(delegate (double num) {
-        //    Debug.Log("Singleton: " + num);
-        //});
-        //CoyoteLng.ForEach(delegate (double num) {
-        //    Debug.Log("Singleton: " + num);
-        //});
     }
 
+    //Global functions that are accessible elsewhere when accessed through a single-ton instance
+    //Adds the value of the sensor array.
     public void AddLatLng(double lat, double lng, int sensorNum)
     {
-        LatSensor.SetValue(lat, sensorNum-1);
+        LatSensor.SetValue(lat, sensorNum-1); //sensorNum-1 because the value of the factor starts from 1 and the array starts from 0
         LngSensor.SetValue(lng, sensorNum-1);
         Debug.Log("Sensor" + sensorNum + ": " + lat + ", " + lng);
-
     }
 }

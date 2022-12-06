@@ -1,4 +1,5 @@
-using Mapbox.Platform.Cache;
+//MapBox SDK example code + edited
+
 using Mapbox.Unity.Map.Interfaces;
 using Mapbox.Unity.Map.Strategies;
 using Mapbox.Unity.Map.TileProviders;
@@ -8,7 +9,6 @@ namespace Mapbox.Unity.Map
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using Mapbox.Unity.Utilities;
 	using Utils;
 	using UnityEngine;
