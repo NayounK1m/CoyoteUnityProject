@@ -59,7 +59,8 @@
 				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
 				_locationsCoyote[i] = Conversions.StringToLatLon(locationString);
                 var instance = Instantiate(_coyotePrefab);
-                instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
+				instance.transform.name = "CoyotePin" + i;
+				instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
                 instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 				_spawnedCoyoteObjects.Add(instance);
             }
@@ -98,7 +99,7 @@
 				var instance = Instantiate(_newCoyotePrefab); //_locationsCoyote[index]
 				instance.transform.localPosition = _map.GeoToWorldPosition(Conversions.StringToLatLon(locationString), true);
 				instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
+				instance.transform.name = "CoyotePin" + _spawnedCoyoteObjects.Count;
 				mainCamera.transform.localPosition = new Vector3(instance.transform.localPosition.x, 30, instance.transform.localPosition.z);
 				_spawnedCoyoteObjects.Add(instance);
 			}
