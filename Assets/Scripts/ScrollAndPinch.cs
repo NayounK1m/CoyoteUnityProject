@@ -10,9 +10,9 @@ class ScrollAndPinch : MonoBehaviour
     //Run only on mobile devices
 #if UNITY_IOS || UNITY_ANDROID
     
-    public Camera Camera;
+    public Camera Camera; //User view
     public bool Rotate;
-    protected Plane Plane;
+    protected Plane Plane; //3D floor
 
     private void Awake()
     {
