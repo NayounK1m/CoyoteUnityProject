@@ -4,28 +4,32 @@ using System.Collections.Generic;
 /* 
  * // Singleton Pattern //
  * Declares a variable called instance statically so that it can be retrieved from scripts within other objects
+ * 
+ * Lat means latitude, Lng means longitude
  */
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;
 
+    //Positions of the three sensors
     public double[] LatSensor = new double[3];
     public double[] LngSensor = new double[3];
 
+    //Last detected coyote positions list
     public List<double> CoyoteLat = new List<double>();
     public List<double> CoyoteLng = new List<double>();
 
-    // Start is called before the first frame update
+    //This function is called before the first frame update
     void Awake()
     {
         if (instance == null) //The instance is null, that is, it does not exist on the system
         { 
-            instance = this; //put this scrpit(component) in an instance.
+            instance = this; //put this(class) in an instance.
             DontDestroyOnLoad(gameObject); //OnLoad Keeps this object Undestroyed
         } 
         else 
         { 
-            if (instance != this) //If the instance is not this, it means that there is already have one instance
+            if (instance != this) //If the instance is not this class, it means that there is already have one instance
                 Destroy(this.gameObject); //Delete this object that has just been awaked because more than one object should not exist
         }
 

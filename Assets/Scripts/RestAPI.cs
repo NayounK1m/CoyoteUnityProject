@@ -4,7 +4,14 @@ using System.Net;
 using UnityEngine;
 using System.Globalization;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;  
+using UnityEngine.UI;
+
+/* 
+ * // HttpWebRequest REST-API code //
+ * The Node.Js server in the Raspberry pie must be turned on to access it.
+ * 
+ * Lat means latitude, Lng means longitude
+ */
 
 public class RestAPI : MonoBehaviour
 {
