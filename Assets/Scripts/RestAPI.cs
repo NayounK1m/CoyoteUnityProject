@@ -16,10 +16,10 @@ public class RestAPI : MonoBehaviour
     {
         for (int i= 1; i<4; i++)
         {
-            string url = "http://127.0.0.1:8081/api/sensors/getSound" + i + "Coord";
+            string url = "http://192.168.2.222:8081/api/sensors/getSound" + i + "Coord";
             GetAllSensorLatLng(url, i);
         }
-        GetAllCoyoteHistory("http://127.0.0.1:8081/api/coyotes/getInitialCoyotes");
+        GetAllCoyoteHistory("http://192.168.2.222:8081/api/coyotes/getInitialCoyotes");
 
         if (failed == false)
             SceneManager.LoadScene("Coyote");
