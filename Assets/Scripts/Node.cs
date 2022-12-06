@@ -7,17 +7,17 @@
     public class Node : MonoBehaviour
     {
         //Coyote Localization value
-        private WebSocket ws;//소켓 선언
+        private WebSocket ws;//Socket Declaration
 
-        void Start()
+    void Start()
         {
-            ws = new WebSocket("ws://192.168.2.222:3333");// IP : 192.168.2.222, PORT : 3333
-            ws.OnOpen += ws_OnOpen;//서버가 연결된 경우 실행할 함수를 등록한다
-            ws.OnMessage += ws_OnMessage; //서버에서 유니티 쪽으로 메세지가 올 경우 실행할 함수를 등록한다.
-            ws.OnClose += ws_OnClose;//서버가 닫힌 경우 실행할 함수를 등록한다.
-            ws.Connect();//서버에 연결한다.
-            ws.Send("goHome");
-        }
+            ws = new WebSocket("ws://192.168.2.222:3333");//IP : 192.168.2.222, PORT : 3333
+            ws.OnOpen += ws_OnOpen;//Register a function to run if the server is connected
+            ws.OnMessage += ws_OnMessage; //Register a function to run when a message comes from the server toward Unity.
+            ws.OnClose += ws_OnClose;//Register a function to run when the server is closed.
+            ws.Connect();//Connect to the server.
+            ws.Send("Client : Connected"); //Send a message to the server
+    }
 
         //실시간
         void ws_OnMessage(object sender, MessageEventArgs e)
