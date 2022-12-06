@@ -19,7 +19,7 @@ public class SingletonLatLng : MonoBehaviour
     public List<double> CoyoteLat = new List<double>();
     public List<double> CoyoteLng = new List<double>();
 
-    //This function is called before the first frame update
+    //Awake is called only once in each script and only after another object is initialized
     void Awake()
     {
         if (instance == null) //The instance is null, that is, it does not exist on the system
@@ -44,6 +44,5 @@ public class SingletonLatLng : MonoBehaviour
     {
         LatSensor.SetValue(lat, sensorNum-1); //sensorNum-1 because the value of the factor starts from 1 and the array starts from 0
         LngSensor.SetValue(lng, sensorNum-1);
-        Debug.Log("Sensor" + sensorNum + ": " + lat + ", " + lng);
     }
 }
