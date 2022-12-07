@@ -1,5 +1,6 @@
-//MapBox SDK example code + edited
-
+/* 
+ * // /MapBox SDK example code + edited //
+ */
 using Mapbox.Unity.Map.Interfaces;
 using Mapbox.Unity.Map.Strategies;
 using Mapbox.Unity.Map.TileProviders;

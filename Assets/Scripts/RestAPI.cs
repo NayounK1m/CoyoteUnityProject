@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /* 
- * // HttpWebRequest REST-API code //
+ * // HttpWebRequest REST-API //
  * The Node.Js server in the Raspberry pie must be turned on to access it.
- * 
- * Lat means latitude, Lng means longitude
+ * Code to retrieve data from the server for up to five locations of the last detected coyote stored in the DB and sensor locations.
+ * Lat means latitude, Lng means longitude.
  * 
  * http://192.168.2.222:8081/api/sensors/getSound1Coord
  * Data received example:
@@ -187,13 +187,13 @@ public class RestAPI : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            //Find data in an array
+            //To find data in an array
             //Calculated according to the rule below is num
-            //i = 0, num = 1
-            //i = 1, num = 3
-            //i = 2, num = 5
-            //i = 3, num = 7
-            //i = 4, num = 9
+            /* i = 0, num = 1
+             * i = 1, num = 3
+             * i = 2, num = 5
+             * i = 3, num = 7
+             * i = 4, num = 9*/
             int num = 2 * i + 1;
 
             //Split the '/' dividing latitude and longitude

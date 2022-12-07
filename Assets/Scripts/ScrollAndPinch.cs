@@ -11,15 +11,17 @@ class ScrollAndPinch : MonoBehaviour
 #if UNITY_IOS || UNITY_ANDROID
     
     public Camera Camera; //User view
-    public bool Rotate;
+    public bool Rotate; //Camera rotation or not
     protected Plane Plane; //3D floor
 
+    //Awake is called only once in each script and only after another object is initialized
     private void Awake()
     {
         if (Camera == null)
             Camera = Camera.main;
     }
 
+    //The Update() function is called every frame by the Unity system.
     private void Update()
     {
 

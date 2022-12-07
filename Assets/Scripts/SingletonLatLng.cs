@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 /* 
  * // Singleton Pattern //
- * Declares a variable called instance statically so that it can be retrieved from scripts within other objects
- * 
- * Lat means latitude, Lng means longitude
+ * Code to store data from servers and access it from anywhere at any time.
+ * Declares a variable called instance statically so that it can be retrieved from scripts within other objects.
+ * Lat means latitude, Lng means longitude.
  */
 public class SingletonLatLng : MonoBehaviour
 {

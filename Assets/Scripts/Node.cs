@@ -4,11 +4,17 @@ using WebSocketSharp;//웹 소켓 라이브러리
 using Assets.SimpleAndroidNotifications;
 using System;
 
+/* 
+ * // WebSocket Communication code //
+ * Code to receive the location of the coyote detected in real time from the server.
+ * Lat means latitude, Lng means longitude.
+ */
 public class Node : MonoBehaviour
 {
     //Coyote Localization value
     private WebSocket ws;//Socket Declaration
 
+    //Start event function invokes once between Awake and Update function call when component is active
     void Start()
     {
         ws = new WebSocket("ws://192.168.2.222:3333");//IP : 192.168.2.222, PORT : 3333
@@ -19,7 +25,7 @@ public class Node : MonoBehaviour
         ws.Send("Client : Connected"); //Send a message to the server
     }
 
-    //실시간
+    //real-time Get message
     void ws_OnMessage(object sender, MessageEventArgs e)
     {
         Debug.Log(e.Data); //received data Debug
