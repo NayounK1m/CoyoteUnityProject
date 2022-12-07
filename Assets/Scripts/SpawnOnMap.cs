@@ -46,39 +46,49 @@ namespace Mapbox.Examples
 		List<GameObject> _spawnedObjects;
 		List<GameObject> _spawnedCoyoteObjects;
 
+		// Use this for initialization
 		void Start()
 		{
-			//센서
+			//Sensor Spawn
 			_locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
-			for (int i = 0; i < _locationStrings.Length; i++)
+			for (int i = 0; i < _locationStrings.Length; i++) //Loop as many sensors declared in the array
 			{
+				//Accessing sensor position values stored in Singleton
 				var locationString = SingletonLatLng.instance.LatSensor[i] + "," + SingletonLatLng.instance.LngSensor[i];
+				//Convert to a LatLon type that exists only in MapBox 
 				_locations[i] = Conversions.StringToLatLon(locationString);
-				var instance = Instantiate(_markerPrefab);
+
+				//Sensor pin Spawn at the location on the map (Spawn info setting)
+				var instance = Instantiate(_markerPrefab); 
 				instance.transform.localPosition = _map.GeoToWorldPosition(_locations[i], true);
 				instance.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
-				_spawnedObjects.Add(instance);
+				_spawnedObjects.Add(instance); //Add to the list of models that have already been spawn
 			}
 
-			//코요태
+			//Coyote Spawn
 			_locationsCoyote = new Vector2d[SingletonLatLng.instance.CoyoteLat.Count];
 			_spawnedCoyoteObjects = new List<GameObject>();
-			for (int i = 0; i < SingletonLatLng.instance.CoyoteLat.Count; i++)
-            {
+			for (int i = 0; i < SingletonLatLng.instance.CoyoteLat.Count; i++) //Loop as many as the list of detected coyotes in Singleton stored
+			{
+				//Accessing coyote position values stored in Singleton
 				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
 				_locationsCoyote[i] = Conversions.StringToLatLon(locationString);
-                var instance = Instantiate(_coyotePrefab);
-				instance.transform.name = "CoyotePin" + i;
+
+				//Coyote pin Spawn at the location on the map (Spawn info setting)
+				var instance = Instantiate(_coyotePrefab);
+				instance.transform.name = "CoyotePin" + i; //change spawned clone name
 				instance.transform.localPosition = _map.GeoToWorldPosition(_locationsCoyote[i], true);
                 instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-				_spawnedCoyoteObjects.Add(instance);
-            }
+				_spawnedCoyoteObjects.Add(instance); //Add to the list of models that have already been spawn
+			}
         }
 
+		// Update is called once per frame
 		private void Update()
 		{
-            int count = _spawnedObjects.Count;
+			//Update the position and scale of the sensor pins(Clone) according to the map and environment situation
+			int count = _spawnedObjects.Count;
             for (int i = 0; i < count; i++)
             {
                 var spawnedObject = _spawnedObjects[i];
@@ -87,13 +97,14 @@ namespace Mapbox.Examples
                 spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
             }
 
+			//Update the position and scale of the coyote pins(Clone) according to the map and environment situation
 			int countCoyote = _spawnedCoyoteObjects.Count;
-			//여태까지 소환된 모델 수 만큼 반복
 			for (int i = 0; i < countCoyote; i++)
 			{
-				//여태까지 소환된 모델들 다 월드 포지션 --> 로컬 포지션 변환, 월드 사이즈 --> 로컬 사이즈 변환
+				//All models spawned so far convert from world position to local position, convert from world size to local size
+				//if there is any additional coyote added to the list, calculate it again including that
 				var spawnedCoyoteObject = _spawnedCoyoteObjects[i];
-				Vector2d[] _locationsCoyoteUpdate = new Vector2d[SingletonLatLng.instance.CoyoteLat.Count];
+				Vector2d[] _locationsCoyoteUpdate = new Vector2d[SingletonLatLng.instance.CoyoteLat.Count]; //Detected coyote list count
 				var locationString = SingletonLatLng.instance.CoyoteLat[i] + "," + SingletonLatLng.instance.CoyoteLng[i];
 				_locationsCoyoteUpdate[i] = Conversions.StringToLatLon(locationString);
 				var locationCoyote = _locationsCoyoteUpdate[i];
@@ -101,15 +112,17 @@ namespace Mapbox.Examples
 				spawnedCoyoteObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 			}
 
-			//실시간 코요태 추가
+			//Additional spawn of detected coyotes in real-time, check the list every frame
 			if (_spawnedCoyoteObjects.Count < SingletonLatLng.instance.CoyoteLat.Count)
 			{
-				//추가되는 코드
+				//Spawn by setting the most recently detected Coyote position value as a reference
 				var locationString = SingletonLatLng.instance.CoyoteLat[SingletonLatLng.instance.CoyoteLat.Count -1] + "," + SingletonLatLng.instance.CoyoteLng[SingletonLatLng.instance.CoyoteLat.Count - 1];
-				var instance = Instantiate(_newCoyotePrefab); //_locationsCoyote[index]
+				var instance = Instantiate(_newCoyotePrefab);
 				instance.transform.localPosition = _map.GeoToWorldPosition(Conversions.StringToLatLon(locationString), true);
 				instance.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-				instance.transform.name = "CoyotePin" + _spawnedCoyoteObjects.Count;
+				instance.transform.name = "CoyotePin" + _spawnedCoyoteObjects.Count; //Change clone pin name
+
+				//Automatically move the camera to a real - time mapped location
 				mainCamera.transform.localPosition = new Vector3(instance.transform.localPosition.x, 30, instance.transform.localPosition.z);
 				_spawnedCoyoteObjects.Add(instance);
 			}
