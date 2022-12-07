@@ -20,6 +20,7 @@ class ScrollAndPinch : MonoBehaviour
     //Awake is called only once in each script and only after another object is initialized
     private void Awake()
     {
+        //If there is no camera, insert the main camera automatically
         if (Camera == null)
             Camera = Camera.main;
     }

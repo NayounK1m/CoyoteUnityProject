@@ -1,4 +1,10 @@
-﻿namespace Mapbox.Examples
+﻿/* 
+ * // Spawn On Map (Mapping) //
+ * It is a code that generates pins to be mapped on a map and updates the mapped pins according to the state and movement of the map.
+ * Lat means latitude, Lng means longitude.
+ */
+
+namespace Mapbox.Examples
 {
 	using UnityEngine;
 	using Mapbox.Utils;
@@ -9,29 +15,34 @@
 	public class SpawnOnMap : MonoBehaviour
 	{
 		[SerializeField]
-		AbstractMap _map;
+		AbstractMap _map; //Map prefab
 
 		[SerializeField]
 		Camera mainCamera;
 
+		//Position value of sensor
 		[Geocode]
 		string[] _locationStrings = new string[3];
 		Vector2d[] _locations;
 
+		//Position value of coyote
 		[Geocode]
-		string[] _locationCoyoteStrings;
 		Vector2d[] _locationsCoyote;
 
 		[SerializeField]
 		float _spawnScale = 1f;
 
+		//Sensor Prefab(Model) Pin
 		[SerializeField]
 		GameObject _markerPrefab;
+		//Coyote Prefab(Model) Pin
 		[SerializeField]
 		GameObject _coyotePrefab;
+		//Most recently detected Coyote prefab(Model) Pin
 		[SerializeField]
 		GameObject _newCoyotePrefab;
 
+		//List of models that have already been spawn
 		List<GameObject> _spawnedObjects;
 		List<GameObject> _spawnedCoyoteObjects;
 
