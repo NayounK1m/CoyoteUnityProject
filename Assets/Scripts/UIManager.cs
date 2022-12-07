@@ -1,3 +1,8 @@
+/*
+ * // Scroll And Pinch, Camera  Movement //
+ * Code to manage the overall UI of the Coyote map scene.
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 

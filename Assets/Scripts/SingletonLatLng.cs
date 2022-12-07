@@ -1,12 +1,13 @@
-using UnityEngine;
-using System.Collections.Generic;
-
 /* 
  * // Singleton Pattern //
  * Code to store data from servers and access it from anywhere at any time.
  * Declares a variable called instance statically so that it can be retrieved from scripts within other objects.
  * Lat means latitude, Lng means longitude.
  */
+
+using UnityEngine;
+using System.Collections.Generic;
+
 public class SingletonLatLng : MonoBehaviour
 {
     public static SingletonLatLng instance = null;

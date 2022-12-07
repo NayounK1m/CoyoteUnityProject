@@ -1,11 +1,3 @@
-using System;
-using System.IO;
-using System.Net;
-using UnityEngine;
-using System.Globalization;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 /* 
  * // HttpWebRequest REST-API //
  * The Node.Js server in the Raspberry pie must be turned on to access it.
@@ -33,6 +25,14 @@ using UnityEngine.UI;
  * }
  * 
  */
+
+using System;
+using System.IO;
+using System.Net;
+using UnityEngine;
+using System.Globalization;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RestAPI : MonoBehaviour
 {

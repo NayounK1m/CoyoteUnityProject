@@ -1,14 +1,15 @@
+/* 
+ * // WebSocket Communication //
+ * Code to receive the location of the coyote detected in real time from the server.
+ * Lat means latitude, Lng means longitude.
+ */
+
 using UnityEngine;
 using System.Globalization;
 using WebSocketSharp;//웹 소켓 라이브러리
 using Assets.SimpleAndroidNotifications;
 using System;
 
-/* 
- * // WebSocket Communication code //
- * Code to receive the location of the coyote detected in real time from the server.
- * Lat means latitude, Lng means longitude.
- */
 public class Node : MonoBehaviour
 {
     //Coyote Localization value

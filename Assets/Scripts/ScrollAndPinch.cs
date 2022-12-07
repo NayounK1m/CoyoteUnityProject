@@ -1,6 +1,9 @@
 /*
-Set this on an empty game object positioned at (0,0,0) and attach your active camera.
-The script only runs on mobile devices or the remote app.
+ * // Scroll And Pinch, Camera  Movement //
+ * The user's view code that will appear above the app.
+ * The camera moves, rotates, and zooms out according to touch, scroll, and pinch.
+ * Set this on an empty game object positioned at (0,0,0) and attach your active camera.
+ * The script only runs on mobile devices or the remote app.
 */
 
 using UnityEngine;
@@ -10,7 +13,7 @@ class ScrollAndPinch : MonoBehaviour
     //Run only on mobile devices
 #if UNITY_IOS || UNITY_ANDROID
     
-    public Camera Camera; //User view
+    public Camera Camera; //User view camera
     public bool Rotate; //Camera rotation or not
     protected Plane Plane; //3D floor
 
@@ -65,9 +68,10 @@ class ScrollAndPinch : MonoBehaviour
 
     }
 
+    //Calculate Plane Position Delta
     protected Vector3 PlanePositionDelta(Touch touch)
     {
-        //not moved
+        //Camera won't move when touch stops
         if (touch.phase != TouchPhase.Moved)
             return Vector3.zero;
 
@@ -81,6 +85,7 @@ class ScrollAndPinch : MonoBehaviour
         return Vector3.zero;
     }
 
+    //Calculate Plane Position
     protected Vector3 PlanePosition(Vector2 screenPos)
     {
         //position
@@ -91,6 +96,7 @@ class ScrollAndPinch : MonoBehaviour
         return Vector3.zero;
     }
 
+    //Function for camera debugging
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
