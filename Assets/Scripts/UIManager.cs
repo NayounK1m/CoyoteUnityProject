@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject listUI; //The button to open the list and the list group UI children below it
     public GameObject listBox; //Item UI to be added to list UI
     public Transform contents; //UI Base Showing Item Lists(ListView -> Contenet panel)
-    public Camera mainCamera; //Camera view
+    public Camera mainCamera;
 
     //Called when the listUI button is pressed. (Button On Click)
     public void OpenList()
